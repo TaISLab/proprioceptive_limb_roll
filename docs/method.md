@@ -10,6 +10,18 @@ ends at the wrist, and rotation about the forearm long axis does not move the
 wrist point. During a physical grasp the gripper's own kinematics give a
 cross-section of the forearm, which is well modelled by an ellipse.
 
+![Visuo-tactile system block diagram](figures/fig3.1_visuotactile_block_diagram.png)
+
+*Thesis fig. 3.1 — the tactile branch (yellow): contact polygon → tactile method
+(John ellipse / Fit Anatomical) → forearm-axis estimation → elbow & wrist
+localisation, feeding the vision/tactile selector and the inverse kinematics.*
+
+![Elliptical fit of the forearm cross-section for 6 subjects](figures/fig2.7_forearm_ellipse_fit.png)
+
+*Thesis fig. 2.7 (adapted from ref. [4]) — the forearm cross-section at 20 % of
+the radius length is modelled as an ellipse; R² 0.898–0.980 over 6 scanned
+subjects.*
+
 ## 1. Contact polygon  (`gripper.py`, §3.4.1)
 
 Per finger: proximal phalanx `L1 = 40 mm`, distal phalanx `L2 = 50 mm`, base
@@ -17,6 +29,12 @@ point `P_base` (from CAD).
 
     P_joint = P_base  + [L1 cos θ1,          L1 sin θ1]
     P_tip   = P_joint + [L2 cos(θ1+θ2),      L2 sin(θ1+θ2)]
+
+![Contact polygon and inscribed ellipse](figures/fig3.5_contact_polygon.png)
+
+*Thesis fig. 3.5 — finger kinematic points (θ₁, θ₂ passive; θ₃ actuated), the
+hexagonal contact polygon after erosion, and the maximum-area inscribed ellipse
+with centre `G`.*
 
 `(θ1, θ2)` come from the magnetic encoders on the passive phalanges. Three convex
 polygon models (must be convex):
@@ -79,6 +97,11 @@ Two pinches 75 mm apart ⇒ ellipse centres `G1` (proximal), `G2` (distal):
 occlusion-free approach window (participant static: variation in a time window
 below a threshold); `d_grasp = ‖Pg − wrist_stored‖`.
 
+![Forearm-axis reconstruction from the two ellipse centres](figures/fig3.6_forearm_axis_reconstruction.png)
+
+*Thesis fig. 3.6 — the two pinch ellipse centres `G1`, `G2` define the forearm
+axis; `Pg`, elbow `P2` and wrist `P3` are placed along it.*
+
 ## 5. Pronosupination angle q5  (`pronosupination.py`, §3.4.5)
 
 Local arm frame at the wrist by Gram–Schmidt (forearm and upper arm are not
@@ -95,6 +118,12 @@ projected on the Y–Z plane of `{arm}`:
     φ5 = atan2(D_y, D_z),   q5 = π/2 − φ5                       (3.30)
 
 Sign: **+ supination, − pronation**, 0 at neutral.
+
+![Arm frame vs. distal ellipse major diagonal](figures/fig3.7_arm_frame_vs_major_diagonal.png)
+
+*Thesis fig. 3.7 — the `{arm}` frame at the wrist and, inset, the distal-pinch
+Y–Z plane where `q5` is read from the angle between `Y_arm` and the ellipse major
+diagonal `D`.*
 
 ### Global vs. local component
 
@@ -129,3 +158,10 @@ Sign: **+ supination, − pronation**, 0 at neutral.
 | Joint error `q1…q4`, multimodal | median < 6° |
 | `q5` global component, dynamic | median ≈ 5.4°, < 10° for 99 % of samples |
 | `q5` continuous (Exp. 3), pentagon + Fit Anatomical | mean 8.31° over the trajectory |
+
+![Continuous q5 tracking vs. accelerometer ground truth](figures/fig4.15_q5_continuous_tracking.png)
+
+*Thesis fig. 4.15 — tactile `q5` (Fit Anatomical + pentagon) against the
+accelerometer GT during a continuous pronation→supination sweep with the gripper
+closed; global mean absolute error 8.31°. The larger error on the slow ascending
+sweep is soft-tissue hysteresis, not filter lag.*

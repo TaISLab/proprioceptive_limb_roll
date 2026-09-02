@@ -32,6 +32,12 @@ parallel pinches of the gripper (separated 75 mm) gives two ellipse centres,
 hence the **forearm longitudinal axis** (the q5 rotation axis) and, from the
 orientation of the **major diagonal of the distal ellipse**, the angle **q5**.
 
+![Contact polygon and maximum-area inscribed ellipse](docs/figures/fig3.5_contact_polygon.png)
+
+*Thesis fig. 3.5 — from the passive phalange angles (θ₁, θ₂) the gripper forms a
+convex contact polygon; the inscribed ellipse (centre `G`) models the forearm
+section. More figures in [`docs/method.md`](docs/method.md).*
+
 Two ellipse-fitting strategies are implemented:
 
 | Method | Idea | Notes |
@@ -123,7 +129,11 @@ See [`CITATION.cff`](CITATION.cff).
 - **Data:** Creative Commons Attribution 4.0 International (CC-BY-4.0) — see
   [`data/LICENSE.md`](data/LICENSE.md).
 
-## 8. Contact
+## 8. Authors
 
-Rodrigo Castro Ochoa &lt;rcastro@uma.es&gt; · Jesús Manuel Gómez de Gabriel
-&lt;jesus.gomez@uma.es&gt; — TaISLab, Universidad de Málaga.
+Rodrigo Castro Ochoa &lt;rcastro@uma.es&gt;, Jesús Manuel Gómez de Gabriel
+&lt;jesus.gomez@uma.es&gt;, Cristina Urdiales, Óscar de Cózar, Beatriz Blázquez —
+TaISLab, Universidad de Málaga.
+
+Contact: Rodrigo Castro Ochoa &lt;rcastro@uma.es&gt; · Jesús Manuel Gómez de
+Gabriel &lt;jesus.gomez@uma.es&gt;.

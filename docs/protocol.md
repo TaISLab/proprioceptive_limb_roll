@@ -51,6 +51,11 @@ Sign: **+ supination, − pronation, 0 at gravity alignment**. Logged over
 - **Also recorded:** contact-polygon feasibility per subject and per pose
   (hexagon vs. pentagon vs. rhombus).
 
+![Top view of the gripper grasping the forearm, accelerometer in hand](figures/fig4.11_gripper_topview_pron_sup.png)
+
+*Thesis fig. 4.11 — both pinches on the forearm and the hand-held accelerometer
+(MPU). a) full pronation `q5 = −90°`; b) full supination `q5 = +90°`.*
+
 ## Experiment 3 — continuous captures, local q5 component (§4.5)
 
 - Continuous angular sweep from pronation to supination, **gripper closed

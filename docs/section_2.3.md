@@ -31,6 +31,8 @@ por los eslabones de la garra subactuada para estimar la elipse anatómica y, co
 ello, extraer el eje mayor para la estimación del último grado de libertad q5 y
 el eje longitudinal del antebrazo, aprovechando la doble pinza de la garra.
 
+![Ajuste de modelos elípticos sobre escaneos 3D del antebrazo](figures/fig2.7_forearm_ellipse_fit.png)
+
 *(Figura 2.7: ajuste de modelos elípticos sobre escaneos 3D del antebrazo humano,
 sección transversal al 20 % de la longitud del radio con origen en el codo.
 Adaptada de [4].)*

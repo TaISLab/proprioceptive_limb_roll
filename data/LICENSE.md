@@ -11,9 +11,9 @@ indicate if changes were made.
 
 ## Attribution
 
-> Castro Ochoa, R. and Gómez de Gabriel, J. M. (2026). *Proprioceptive estimation
-> of forearm roll during robotic grasping — dataset.* TaISLab, Universidad de
-> Málaga. Licensed under CC BY 4.0.
+> Castro Ochoa, R., Gómez de Gabriel, J. M., Urdiales, C., de Cózar, Ó. and
+> Blázquez, B. (2026). *Proprioceptive estimation of forearm roll during robotic
+> grasping — dataset.* TaISLab, Universidad de Málaga. Licensed under CC BY 4.0.
 
 ## Note on human-subjects data
 
