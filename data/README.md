@@ -1,58 +1,73 @@
 # Data
 
+License: **CC-BY-4.0** — see [`LICENSE.md`](LICENSE.md). Collected under signed
+informed consent with guaranteed anonymisation (thesis §4.2).
+
 ## Organisation
 
 ```
 data/
-├── raw/         # exactly as logged by the acquisition software — treat as READ-ONLY
-│   ├── P01/
-│   │   ├── P01_session01_<condition>.csv
-│   │   └── P01_notes.md
-│   ├── P02/
-│   └── ...
-└── processed/   # tidy tables produced by code/processing/ (regenerable, not tracked)
+├── raw/
+│   ├── exp2_discrete/        # Experiment 2 — 9 participants, discrete 20° sweep
+│   │   ├── P01/
+│   │   │   ├── P01_pronation.csv
+│   │   │   ├── P01_supination.csv
+│   │   │   ├── P01_anthropometry.json   # forearm section semi-axes a, b; arm tested
+│   │   │   └── P01_notes.md
+│   │   └── ...
+│   └── exp3_continuous/      # Experiment 3 — continuous sweep, gripper closed
+│       ├── P01/
+│       │   ├── P01_sweep01.csv
+│       │   └── P01_anthropometry.json
+│       └── ...
+└── processed/                # tidy tables from code/processing/ (regenerable, not tracked)
 ```
 
-- One folder per participant, anonymised as `P01`, `P02`, … No names, dates of
-  birth, or other identifying data anywhere in this repository.
-- Do not edit files in `raw/` by hand. All cleaning happens in
-  `code/processing/` and is written to `processed/`.
+- One folder per participant, anonymised `P01`, `P02`, … No names, DOB or other
+  identifying data anywhere in the repository.
+- `raw/` is read-only; all cleaning happens in `code/processing/`.
 
-## Raw file format
-
-> ⚠️ **TODO** — replace with the real columns once the acquisition script is
-> finalised. Example schema:
+## Raw file schema (proposed — confirm against the acquisition node)
 
 | Column | Unit | Description |
 |--------|------|-------------|
-| `t` | s | timestamp from start of trial |
-| `trial` | – | trial index within the session |
-| `condition` | – | experimental condition label |
-| `target_angle` | deg | commanded forearm roll angle |
-| `actual_angle` | deg | measured forearm roll angle (ground-truth sensor) |
-| `reported_angle` | deg | participant's proprioceptive estimate |
-| `grip_force` | N | gripper force set-point / measured |
-| `finger_pos` | mm or deg | adaptive finger configuration |
-| `direction` | pron/sup | rotation direction |
-| `response_time` | s | time from end of rotation to report |
+| `t` | s | ROS timestamp, zeroed at the start of the recording |
+| `capture` | – | discrete capture index (Exp. 2); empty for continuous (Exp. 3) |
+| `theta1_prox_L`, `theta2_dist_L` | rad | left-finger phalange encoder angles, proximal pinch |
+| `theta1_prox_R`, `theta2_dist_R` | rad | right-finger phalange encoder angles, proximal pinch |
+| `theta1_prox_L_d`, `theta2_dist_L_d`, `theta1_prox_R_d`, `theta2_dist_R_d` | rad | same, distal pinch |
+| `q5_gt` | rad | accelerometer ground truth, `atan2(a_y,a_z) − offset − π/2` |
+| `acc_x`, `acc_y`, `acc_z` | m/s² | raw accelerometer, for reprocessing the GT |
+| `gripper_state` | open/closed | commanded gripper state (Exp. 2 toggles between captures) |
+| `polygon_feasible_hex`, `polygon_feasible_pent`, `polygon_feasible_rhomb` | bool | per-frame feasibility |
+| `ee_pose` | 7×float | end-effector pose (pos + quat) in the base frame, if logged |
+
+## `*_anthropometry.json`
+
+```json
+{
+  "participant": "P01",
+  "sex": "M",
+  "arm_tested": "right",
+  "forearm_section_semi_axis_a_mm": 0.0,
+  "forearm_section_semi_axis_b_mm": 0.0,
+  "reference_joint_config_deg": {"q1": 0, "q2": 0, "q3": 0, "q4": 90},
+  "notes": ""
+}
+```
 
 ## Processed / tidy dataset
 
-`code/processing/build_dataset.py` (or `.m`) produces one long-format table:
+`code/processing/build_dataset.py` produces one long-format table per experiment:
 
-`participant, trial, condition, target_angle, actual_angle, reported_angle, signed_error, abs_error, ...`
+`experiment, participant, capture, t, method, polygon_model, q5_est, q5_gt, signed_error, abs_error`
 
 ## Large files
 
-If raw data exceeds a few tens of MB, track it with **Git LFS**:
+If a recording set exceeds a few tens of MB, track it with **Git LFS**:
 
 ```bash
 git lfs install
 git lfs track "data/raw/**/*.csv"
 git add .gitattributes
 ```
-
-## Ethics
-
-> ⚠️ **TODO** — ethics committee approval reference, informed consent statement,
-> and any data-sharing restrictions.

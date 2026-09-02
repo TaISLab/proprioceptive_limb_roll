@@ -38,3 +38,7 @@ results/tables/**
 # --- Misc ---
 *.log
 *.tmp
+
+# --- Python build/test ---
+.coverage
+htmlcov/

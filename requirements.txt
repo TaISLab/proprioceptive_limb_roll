@@ -1,8 +1,10 @@
-# Python dependencies for processing and analysis.
-# TODO: pin versions once the pipeline is written.
+# Python dependencies for code/estimation, code/processing and code/analysis.
+# Pin exact versions once the pipeline stabilises.
 numpy
-pandas
 scipy
+pandas
 matplotlib
-# statsmodels
-# pyserial        # if acquisition talks to a microcontroller over serial
+shapely            # morphological erosion of the contact polygon
+cvxpy              # convex program for the maximum-area inscribed ellipse (MVIE)
+pyyaml             # read config/gripper.yaml
+# seaborn          # optional, nicer distribution plots for the analysis

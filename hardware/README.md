@@ -1,32 +1,49 @@
 # Hardware
 
-Description of the robotic gripper with adaptive fingers and the rotation rig
-used to grasp and roll the participant's forearm.
+pHRI workstation and gripper used to grasp and roll the participant's forearm
+(thesis §2.1, §3.4.1, §4.1).
 
-> ⚠️ **TODO** — from Section 2.3 and lab records.
+## Manipulator
 
-## Gripper
+- **Franka FR3** collaborative arm, ROS Noetic.
+- Cartesian impedance control with low rotational stiffness during the grasp
+  trajectory (to allow angular accommodation of the forearm).
+- Safety: kinematic limits (velocity, acceleration, jerk) and dynamic thresholds
+  (joint-torque limit, external-force detection).
 
-- Type: *TODO (adaptive / underactuated, number of fingers, tendon vs. linkage)*
-- Actuation: *TODO (motor, gearbox, series elasticity)*
-- Finger material / compliance: *TODO*
-- Grip-force range and how it is set/measured: *TODO*
+## Under-actuated gripper
 
-## Forearm rotation
+- Two **parallel pinches**, **75 mm** apart, so two forearm cross-sections are
+  sampled far enough apart to define the forearm axis.
+- Each finger: two links — proximal phalanx **L1 = 40 mm**, distal phalanx
+  **L2 = 50 mm** — with a fixed base point `P_base` per finger (from CAD; fill in
+  `config/gripper.yaml`).
+- Passive phalange angles `(θ1, θ2)` read by **high-resolution magnetic
+  encoders**.
+- Smart servo with position feedback on the actuated joint.
+- Under-actuation gives passive accommodation to different forearm anthropometries
+  (but the pentagon/rhombus contact models lose feasibility for large or
+  off-centre forearms — thesis fig. 4.12).
 
-- Actuator providing roll: *TODO*
-- Ground-truth angle sensor: *TODO (encoder resolution / IMU / manual goniometer)*
-- Angle range and speed used: *TODO*
+## Vision (context, not used by this repo's estimator)
 
-## Sensing & acquisition
+- 4 RGB-D cameras, one per corner of the station, extrinsically calibrated
+  eye-to-hand w.r.t. the manipulator base; factory intrinsic calibration.
 
-- Force / torque: *TODO*
-- Controller / DAQ / microcontroller: *TODO*
-- Sampling rate: *TODO*
-- Vision occlusion method: *TODO*
+## Ground-truth sensor for q5
 
-## Files
+- IMU / accelerometer, **MPU module**, held in the participant's hand.
+- Read over `rosserial`, synchronised in ROS with the gripper proprioception.
+- `q5_GT = atan2(a_y, a_z) − offset − π/2` (thesis eq. 4.1).
 
-- `cad/` — *TODO: STEP/STL of custom fingers and fixtures*
-- `bom.csv` — *TODO: bill of materials*
-- `wiring.md` — *TODO: connections and pinout*
+## OptiTrack (Experiment 1 only)
+
+- 10 cameras (6× Prime 13, 4× Prime 13W), 120 Hz; NaturalPoint, Inc.
+- 15 mm IR marker pairs on both sides of each joint; wrist markers replaced by a
+  hand-held two-marker stick to avoid interfering with the grasp.
+
+## Files to add
+
+- `cad/` — STEP/STL of the custom fingers and fixtures.
+- `bom.csv` — bill of materials.
+- `wiring.md` — encoder / servo / IMU connections and pinout.

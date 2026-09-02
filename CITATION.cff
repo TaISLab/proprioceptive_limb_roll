@@ -1,21 +1,41 @@
 cff-version: 1.2.0
-message: "If you use this software or dataset, please cite the associated paper."
+message: "If you use this code or dataset, please cite the thesis below."
 title: "Proprioceptive estimation of forearm roll during robotic grasping — code and data"
+abstract: >-
+  Code and datasets for estimating the human forearm roll angle (pronosupination,
+  q5) from the proprioceptive state of an under-actuated robotic gripper grasping
+  the forearm: contact-polygon construction from phalange encoders, morphological
+  erosion, maximum-area inscribed ellipse (John ellipse / MVIE) and a flexible
+  anatomical ellipse fit, forearm-axis reconstruction and q5 computation.
+  Supports Sections 2.3 and 3.4 and Experiments 2–3 of the Master's thesis.
+type: software
 authors:
-  - family-names: "Gómez-de-Gabriel"
-    given-names: "J. Manuel"
+  - family-names: "Castro Ochoa"
+    given-names: "Rodrigo"
+    affiliation: "Universidad de Málaga"
+    email: "rcastro@uma.es"
+  - family-names: "Gómez de Gabriel"
+    given-names: "Jesús Manuel"
     affiliation: "Universidad de Málaga"
     email: "jesus.gomez@uma.es"
-# TODO: add remaining co-authors
+keywords:
+  - "physical human-robot interaction"
+  - "proprioceptive tactile perception"
+  - "under-actuated gripper"
+  - "forearm pronosupination"
+  - "maximum volume inscribed ellipsoid"
 version: "0.1.0"
 date-released: "2026-09-02"
 license: MIT
-# TODO: add repository URL and, once published, the paper DOI
+repository-code: "https://github.com/TaISLab/proprioceptive_limb_roll"
 preferred-citation:
-  type: article
-  title: "TODO — full paper title (see Section 2.3)"
+  type: thesis
+  title: "Sistema multisensorial para la interacción física humano-robot"
   authors:
-    - family-names: "Gómez-de-Gabriel"
-      given-names: "J. Manuel"
+    - family-names: "Castro Ochoa"
+      given-names: "Rodrigo"
+  thesis-type: "Trabajo Fin de Máster"
+  institution:
+    name: "Universidad de Málaga — Escuela de Ingenierías Industriales, Dpto. de Ingeniería de Sistemas y Automática"
   year: 2026
-  # journal / doi: TODO
+  month: 6
