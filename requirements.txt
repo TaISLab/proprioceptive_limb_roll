@@ -1,0 +1,8 @@
+# Python dependencies for processing and analysis.
+# TODO: pin versions once the pipeline is written.
+numpy
+pandas
+scipy
+matplotlib
+# statsmodels
+# pyserial        # if acquisition talks to a microcontroller over serial

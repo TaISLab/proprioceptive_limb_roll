@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite the associated paper."
+title: "Proprioceptive estimation of forearm roll during robotic grasping — code and data"
+authors:
+  - family-names: "Gómez-de-Gabriel"
+    given-names: "J. Manuel"
+    affiliation: "Universidad de Málaga"
+    email: "jesus.gomez@uma.es"
+# TODO: add remaining co-authors
+version: "0.1.0"
+date-released: "2026-09-02"
+license: MIT
+# TODO: add repository URL and, once published, the paper DOI
+preferred-citation:
+  type: article
+  title: "TODO — full paper title (see Section 2.3)"
+  authors:
+    - family-names: "Gómez-de-Gabriel"
+      given-names: "J. Manuel"
+  year: 2026
+  # journal / doi: TODO

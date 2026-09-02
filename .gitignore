@@ -1,0 +1,40 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# --- MATLAB ---
+*.asv
+*.m~
+slprj/
+*.mex*
+
+# --- Large / derived data (keep raw data tracked or via Git LFS; see data/README.md) ---
+data/processed/**
+!data/processed/.gitkeep
+results/figures/**
+!results/figures/.gitkeep
+results/tables/**
+!results/tables/.gitkeep
+
+# --- Misc ---
+*.log
+*.tmp
