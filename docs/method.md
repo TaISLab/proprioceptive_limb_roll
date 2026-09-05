@@ -149,19 +149,10 @@ diagonal `D`.*
 - **MVIE over-rounding:** motivates the Fit Anatomical method.
 - **Polygon infeasibility** for large/off-centre forearms (pentagon/rhombus).
 
-## Reported accuracy (thesis Chapter 4)
+## Quantitative validation
 
-| Quantity | Result |
-|----------|--------|
-| Cartesian pose, visual-only, under occlusion | drift up to 12 cm |
-| Cartesian pose, multimodal visuo-tactile | 2.58 cm (≈ 80 % error reduction) |
-| Joint error `q1…q4`, multimodal | median < 6° |
-| `q5` global component, dynamic | median ≈ 5.4°, < 10° for 99 % of samples |
-| `q5` continuous (Exp. 3), pentagon + Fit Anatomical | mean 8.31° over the trajectory |
-
-![Continuous q5 tracking vs. accelerometer ground truth](figures/fig4.15_q5_continuous_tracking.png)
-
-*Thesis fig. 4.15 — tactile `q5` (Fit Anatomical + pentagon) against the
-accelerometer GT during a continuous pronation→supination sweep with the gripper
-closed; global mean absolute error 8.31°. The larger error on the slow ascending
-sweep is soft-tissue hysteresis, not filter lag.*
+Experiments 2 and 3 validate this pipeline against IMU ground truth (ellipse
+strategy, contact-polygon model, static vs. continuous motion). The numerical
+results are reported in the accompanying journal publication (see
+[`CITATION.cff`](../CITATION.cff) for how to cite once available) rather than
+duplicated here.

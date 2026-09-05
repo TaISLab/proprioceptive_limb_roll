@@ -43,7 +43,7 @@ Two ellipse-fitting strategies are implemented:
 | Method | Idea | Notes |
 |--------|------|-------|
 | **John ellipse (MVIE)** | Maximum-area ellipse inscribed in the contact polygon, as a convex program `max log det(G)` s.t. `G ⪰ 0`, `‖G aᵢ‖₂ + aᵢᵀc ≤ bᵢ`. | Fast, global optimum; accuracy depends on how well the gripper accommodates the arm. Tends to over-round (low aspect ratio). |
-| **Fit Anatomical** | Fit an ellipse of *known* anthropometric aspect ratio `a/b`; optimise centre `(cx,cy)`, orientation `θ (= q5)` and isotropic scale `s` with an asymmetric penalty, solved with L-BFGS-B. | Robust to sub-optimal grasps. Mean continuous error 8.31° in Experiment 3. |
+| **Fit Anatomical** | Fit an ellipse of *known* anthropometric aspect ratio `a/b`; optimise centre `(cx,cy)`, orientation `θ (= q5)` and isotropic scale `s` with an asymmetric penalty, solved with L-BFGS-B. | Robust to sub-optimal grasps. Quantitative validation is reported in the forthcoming journal paper (see [`CITATION.cff`](CITATION.cff)). |
 
 ## 2. Repository layout
 
@@ -63,9 +63,7 @@ Two ellipse-fitting strategies are implemented:
 │   ├── processing/        # raw logs -> tidy per-trial tables
 │   └── analysis/          # error analysis and figures for Experiments 2 and 3
 ├── data/
-│   ├── raw/
-│   │   ├── exp2_discrete/     # 9 participants, static 20° sweep, gripper opened/closed between captures
-│   │   └── exp3_continuous/   # continuous pron->sup sweep, gripper closed, 1-D Kalman
+│   ├── raw/                   # NOT stored in this repo — see "Data" below
 │   └── processed/             # regenerable tidy tables (not tracked)
 ├── docs/
 │   ├── section_2.3.md     # transcription of the thesis section
@@ -93,9 +91,13 @@ pronation**, zero at the neutral pose.
 
 ## 4. Data
 
-See [`data/README.md`](data/README.md) for the file schema. Participants are
-anonymised (`P01`, `P02`, …); no identifying data is stored. Data collected under
-signed informed consent with guaranteed anonymisation (thesis §4.2).
+The raw per-participant recordings for Experiments 2 and 3 are **not stored in
+this repository**. They are archived as a separate dataset on Zenodo under
+CC-BY-4.0, with their own DOI (link added here once minted — see
+[`data/README.md`](data/README.md) for the current status and the file schema).
+Participants are anonymised (`P01`, `P02`, …); no identifying data is stored.
+Data collected under signed informed consent with guaranteed anonymisation
+(thesis §4.2).
 
 - **Experiment 2 (discrete):** cohort of 9 (5 M, 4 F). From neutral (0°), forearm
   resting on the pinch base, static sweep in **20° increments** to maximum
@@ -114,6 +116,8 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate    |    Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
 
+# Download the dataset from Zenodo (see data/README.md) and unpack it under
+# data/raw/ before running the pipeline below.
 python code/processing/build_dataset.py       # data/raw -> data/processed
 python code/analysis/exp2_discrete.py         # -> results/figures, results/tables
 python code/analysis/exp3_continuous.py

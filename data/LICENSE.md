@@ -1,6 +1,10 @@
 # Data license — Creative Commons Attribution 4.0 International (CC BY 4.0)
 
-The datasets in `data/` are licensed under CC BY 4.0.
+The datasets described here are licensed under CC BY 4.0. The raw data itself
+is archived on Zenodo (not in this git repository) — see
+[`README.md`](README.md) for the record DOI once published. This license
+applies identically to the Zenodo record and to any excerpt of the data
+distributed from this repository.
 
 - Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
 - Summary: https://creativecommons.org/licenses/by/4.0/

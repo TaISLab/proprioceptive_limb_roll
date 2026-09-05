@@ -27,7 +27,11 @@ env/
 slprj/
 *.mex*
 
-# --- Large / derived data (keep raw data tracked or via Git LFS; see data/README.md) ---
+# --- Data (raw datasets are archived on Zenodo, not tracked here; see data/README.md) ---
+data/raw/*
+!data/raw/*/
+data/raw/*/*
+!data/raw/*/.gitkeep
 data/processed/**
 !data/processed/.gitkeep
 results/figures/**
