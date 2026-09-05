@@ -11,39 +11,85 @@ timing independent of the code repository (e.g. to coordinate with the journal
 submission), avoid bloating the git history with CSV data, and give the
 dataset its own citable DOI.
 
-**Status:** not yet deposited. Once Rodrigo's raw exports for Experiments 2 and
-3 are finalised, upload them to Zenodo as a new record (see "How to publish"
-below) and fill in here:
+**Status:** Rodrigo's raw exports for Experiments 2 and 3 have been received
+and anonymised locally (kept only under `data/raw/`, which is git-ignored —
+never committed). **Not yet deposited on Zenodo**, deliberately: the
+Experiment 3 export already carries a precomputed per-sample error against
+ground truth, which is effectively the paper's headline result at sample
+resolution — publishing it now would let anyone reproduce the accuracy figure
+before the journal submission. Hold the deposit until the paper timing is
+decided, then fill in:
 
 - Dataset DOI: `TODO`
 - Dataset URL: `TODO`
 
+**Anonymisation:** the mapping from real participant names to codes (`P01`…)
+is held privately by the PI, outside this repository and outside Zenodo — it
+must never be committed or uploaded anywhere.
+
 To reproduce the analysis locally, download the Zenodo archive and unpack it
 under `data/raw/` following the layout below (git-ignored — see `.gitignore`).
 
-## Organisation (expected local layout after download)
+## Organisation (actual, as received from Rodrigo)
 
 ```
 data/
-├── raw/                       # from the Zenodo archive — not tracked by git
-│   ├── exp2_discrete/         # Experiment 2 — 9 participants, discrete 20° sweep
-│   │   ├── P01/
-│   │   │   ├── P01_pronation.csv
-│   │   │   ├── P01_supination.csv
-│   │   │   ├── P01_anthropometry.json   # forearm section semi-axes a, b; arm tested
-│   │   │   └── P01_notes.md
-│   │   └── ...
-│   └── exp3_continuous/       # Experiment 3 — continuous sweep, gripper closed
-│       ├── P01/
-│       │   ├── P01_sweep01.csv
-│       │   └── P01_anthropometry.json
-│       └── ...
-└── processed/                 # tidy tables from code/processing/ (regenerable, not tracked)
+├── raw/                                      # git-ignored, never committed
+│   ├── exp2_discrete/
+│   │   └── exp2_discrete_anonymized.csv      # all 9 sessions in one wide table
+│   └── exp3_continuous/
+│       └── exp3_continuous_sweep01_raw.csv   # single rosbag-style export (see below)
+└── processed/                                # tidy tables from code/processing/ (regenerable, not tracked)
 ```
 
-- One folder per participant, anonymised `P01`, `P02`, … No names, DOB or other
-  identifying data anywhere in the dataset.
-- `raw/` is read-only; all cleaning happens in `code/processing/`.
+This differs from the earlier per-participant-folder layout originally
+sketched here (that was a guess made before any real export existed). Both
+files use anonymised participant codes `P01`…`P08`, some with an `L` suffix
+for a left-arm session (`P07`/`P07L` = same participant, right/left arm;
+`P08L` = a participant with only a left-arm session recorded) — **no names,
+DOB or other identifying data**.
+
+## Raw file schema (as actually received — Exp. 2)
+
+`exp2_discrete_anonymized.csv`: one wide table, one row per discrete capture,
+all participants together.
+
+| Column | Unit | Description |
+|--------|------|-------------|
+| `id` | – | global row index |
+| `participant` | – | anonymised code (`P01`…, see above) |
+| `q5_gt` | **deg** | ground-truth pronosupination angle (IMU) |
+| `dedo1_q1`…`dedo4_q2` | **deg** | phalange encoder angles, 4 fingers × 2 joints each (proximal `q1`, distal `q2`) |
+
+Notes / open questions for Rodrigo:
+- Units are **degrees**, not radians as originally assumed — `code/estimation`
+  expects radians, so `build_dataset.py` must convert.
+- Need the exact `dedo1`…`dedo4` → {proximal pinch L/R, distal pinch L/R}
+  mapping used in `gripper.py`'s hexagon construction.
+- No anthropometry (`a`, `b` semi-axes) accompanies this file yet — needed for
+  Fit Anatomical and still pending.
+
+## Raw file schema (as actually received — Exp. 3)
+
+`exp3_continuous_sweep01_raw.csv`: a raw `rosbag`-to-CSV export (one row per
+ROS message, topic columns sparse/misaligned in time — needs resampling, not
+a tidy table). Relevant columns:
+
+| Column | Unit | Description |
+|--------|------|-------------|
+| `__time` | s (epoch) | message timestamp |
+| `/roll_angle_x/data` | **deg** | IMU ground truth |
+| `/tactile/q5_pinza_1/angle`, `/tactile/q5_pinza_2/angle` | **deg** | per-pinch local q5 estimate |
+| `/tactile/info/elbow/*`, `/tactile/info/wrist/*`, `/tactile/info/grasping_point/*` | m | forearm-axis reconstruction (§3.4.4) |
+| `q5_inv` | deg | `q5_pinza_2` re-expressed in the ground-truth sign convention (`180 − q5_pinza_2`) |
+| `error_abs` | deg | **precomputed** \|`q5_inv` − ground truth\| — already the accuracy metric, at sample resolution |
+
+`error_abs`/`q5_inv` being already computed is exactly why this file is not
+going to Zenodo yet (see "Status" above) — it lets anyone reconstruct the
+paper's headline accuracy number directly. Also open: `/tactile/q5_pinza_1/angle`
+sits in a narrow 99–109° band throughout the recording (unlike `pinza_2`,
+which spans the full sweep) — worth confirming with Rodrigo whether pinch 1
+was static/occluded for this session or this is a genuine signal.
 
 ## How to publish the dataset on Zenodo
 
@@ -60,22 +106,11 @@ data/
    (zenodo.org → GitHub) so tagged **code** releases also get their own
    software DOI, separate from the dataset DOI.
 
-## Raw file schema (proposed — confirm against the acquisition node)
+## Anthropometry (still pending from Rodrigo)
 
-| Column | Unit | Description |
-|--------|------|-------------|
-| `t` | s | ROS timestamp, zeroed at the start of the recording |
-| `capture` | – | discrete capture index (Exp. 2); empty for continuous (Exp. 3) |
-| `theta1_prox_L`, `theta2_dist_L` | rad | left-finger phalange encoder angles, proximal pinch |
-| `theta1_prox_R`, `theta2_dist_R` | rad | right-finger phalange encoder angles, proximal pinch |
-| `theta1_prox_L_d`, `theta2_dist_L_d`, `theta1_prox_R_d`, `theta2_dist_R_d` | rad | same, distal pinch |
-| `q5_gt` | rad | accelerometer ground truth, `atan2(a_y,a_z) − offset − π/2` |
-| `acc_x`, `acc_y`, `acc_z` | m/s² | raw accelerometer, for reprocessing the GT |
-| `gripper_state` | open/closed | commanded gripper state (Exp. 2 toggles between captures) |
-| `polygon_feasible_hex`, `polygon_feasible_pent`, `polygon_feasible_rhomb` | bool | per-frame feasibility |
-| `ee_pose` | 7×float | end-effector pose (pos + quat) in the base frame, if logged |
-
-## `*_anthropometry.json`
+Neither raw file above includes per-participant forearm section semi-axes
+(`a`, `b`), needed to calibrate Fit Anatomical (Exp. 3) and useful context for
+Exp. 2. Once provided, one JSON per participant:
 
 ```json
 {
