@@ -111,11 +111,21 @@ was static/occluded for this session or this is a genuine signal.
    (zenodo.org → GitHub) so tagged **code** releases also get their own
    software DOI, separate from the dataset DOI.
 
-## Anthropometry (still pending from Rodrigo)
+## Anthropometry / demographics
 
-Neither raw file above includes per-participant forearm section semi-axes
-(`a`, `b`), needed to calibrate Fit Anatomical (Exp. 3) and useful context for
-Exp. 2. Once provided, one JSON per participant:
+`sex` and `arm_tested` are inferred, not measured: `arm_tested` from the
+session naming convention (an `L`-suffixed code = left arm; no suffix =
+right, the default when the raw export doesn't say otherwise), `sex` from
+the participant's real first name (checked privately against the anonymised
+code, then discarded — see "Anonymisation" above). This is recorded in
+`data/raw/exp2_discrete/participants_meta.csv` (git-ignored, like all raw
+data). One participant (`P05`) has a name that doesn't clearly indicate sex
+by this convention — left blank pending confirmation.
+
+Still missing entirely: the forearm section semi-axes (`a`, `b`) needed to
+calibrate Fit Anatomical (Exp. 3) and useful context for Exp. 2 — genuinely
+pending from Rodrigo, not inferrable. Target per-participant schema once
+provided:
 
 ```json
 {
