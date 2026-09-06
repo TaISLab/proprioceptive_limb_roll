@@ -13,6 +13,8 @@ to allow angular accommodation.
 
 ## Ethics & safety (§4.2)
 
+- Approved by the **Comité Ético de Experimentación de la Universidad de
+  Málaga (CEUMA)**, registration number **7-2023-H**.
 - Participants briefed on the collaborative-workstation safety protocols: robot
   kinematic limits (velocity, acceleration, jerk) and dynamic thresholds (joint
   torque limits, external-force detection).

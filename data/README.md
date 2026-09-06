@@ -1,7 +1,9 @@
 # Data
 
 License: **CC-BY-4.0** — see [`LICENSE.md`](LICENSE.md). Collected under signed
-informed consent with guaranteed anonymisation (thesis §4.2).
+informed consent with guaranteed anonymisation (thesis §4.2), approved by the
+Comité Ético de Experimentación de la Universidad de Málaga (CEUMA),
+registration number **7-2023-H**.
 
 ## Where the data actually lives
 

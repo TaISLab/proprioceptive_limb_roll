@@ -23,7 +23,9 @@ indicate if changes were made.
 
 All recordings are anonymised (participant codes `P01`, `P02`, …) and were
 collected under signed informed consent authorising automated capture and
-processing (thesis §4.2). Do not attempt to re-identify participants.
+processing (thesis §4.2), approved by the Comité Ético de Experimentación de
+la Universidad de Málaga (CEUMA), registration number **7-2023-H**. Do not
+attempt to re-identify participants.
 
 The **code** in this repository is licensed separately under the MIT License
 (see the top-level `LICENSE`).

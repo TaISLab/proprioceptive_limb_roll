@@ -131,13 +131,22 @@ python code/analysis/exp3_continuous.py
 
 See [`CITATION.cff`](CITATION.cff).
 
-## 7. License
+## 7. Funding
+
+This work is part of project **PID2021-127221OB-I00** (CONCERTO — Control
+Colaborativo para Interacción física Empática entre RoboT y humanO), funded
+by MICIU/AEI/10.13039/501100011033/FEDER, UE. TaISLab, Universidad de Málaga.
+
+> Este proyecto es parte del proyecto PID2021-127221OB-I00, financiado por
+> MICIU/AEI/10.13039/501100011033/FEDER, UE.
+
+## 8. License
 
 - **Code:** MIT — see [`LICENSE`](LICENSE).
 - **Data:** Creative Commons Attribution 4.0 International (CC-BY-4.0) — see
   [`data/LICENSE.md`](data/LICENSE.md).
 
-## 8. Authors
+## 9. Authors
 
 Rodrigo Castro Ochoa &lt;rcastro@uma.es&gt;, Jesús Manuel Gómez de Gabriel
 &lt;jesus.gomez@uma.es&gt;, Cristina Urdiales, Óscar de Cózar, Beatriz Blázquez —
