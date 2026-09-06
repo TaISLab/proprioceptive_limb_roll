@@ -8,6 +8,14 @@ gripper:
   finger_base_positions_mm:            # Pbase of each finger w.r.t. the gripper centre  (TODO: fill from CAD)
     left:  [0.0, 0.0]
     right: [0.0, 0.0]
+  # Raw acquisition column -> (pinch, side), confirmed by Rodrigo (2026-09-06),
+  # "izquierda/derecha" from the participant's point of view. See
+  # code/processing/build_dataset.py and data/README.md.
+  raw_finger_column_mapping:
+    dedo1: [proximal, right]
+    dedo2: [proximal, left]
+    dedo3: [distal, left]
+    dedo4: [distal, right]
 
 contact_polygon:
   model: hexagon            # hexagon | pentagon | rhombus  (hexagon: 100% feasible; pentagon/rhombus ~80%)

@@ -61,13 +61,18 @@ all participants together.
 | `q5_gt` | **deg** | ground-truth pronosupination angle (IMU) |
 | `dedo1_q1`…`dedo4_q2` | **deg** | phalange encoder angles, 4 fingers × 2 joints each (proximal `q1`, distal `q2`) |
 
-Notes / open questions for Rodrigo:
-- Units are **degrees**, not radians as originally assumed — `code/estimation`
-  expects radians, so `build_dataset.py` must convert.
-- Need the exact `dedo1`…`dedo4` → {proximal pinch L/R, distal pinch L/R}
-  mapping used in `gripper.py`'s hexagon construction.
-- No anthropometry (`a`, `b` semi-axes) accompanies this file yet — needed for
-  Fit Anatomical and still pending.
+Notes:
+- Units are **degrees**, not radians as originally assumed —
+  `code/processing/build_dataset.py` converts to radians and renames columns
+  to the pinch/side-labelled names `gripper.py` expects (see
+  `config/gripper.yaml`'s `raw_finger_column_mapping`, confirmed by Rodrigo:
+  `dedo1`=proximal-right, `dedo2`=proximal-left, `dedo3`=distal-left,
+  `dedo4`=distal-right).
+- Still open: no anthropometry (`a`, `b` semi-axes) accompanies this file yet
+  — needed for Fit Anatomical — and `P_base` per finger from CAD is still
+  missing, which blocks actually running `gripper.contact_polygon` on this
+  data (parsing/unit conversion works today; the geometric estimation doesn't
+  yet).
 
 ## Raw file schema (as actually received — Exp. 3)
 

@@ -37,4 +37,9 @@ python code/analysis/exp3_continuous.py
 Items still marked `NotImplementedError` / `TODO`: pentagon & rhombus polygon
 construction (line-intersection, eq. 3.23–3.25), `P_base` values from CAD, the
 gripper-plane → Cartesian mapping of the ellipse major diagonal, and the
-acquisition / processing / analysis scripts.
+acquisition / analysis scripts.
+
+`processing/build_dataset.py` parses the real Experiment 2 (discrete) export
+(column rename + deg→rad) — see `data/README.md`. It does not yet run the
+geometric pipeline on that data (blocked on `P_base`), and Experiment 3
+(continuous) still needs its own resampling step for the raw rosbag export.
