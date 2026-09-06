@@ -8,20 +8,43 @@
 #   https://doi.org/10.1016/j.mechmachtheory.2022.105062
 
 gripper:
-  proximal_phalanx_length_mm: 40.0     # L1
-  distal_phalanx_length_mm:    50.0     # L2
+  proximal_phalanx_length_mm: 40.0     # L1, matches "Phalanx length a" in Table 1 of Ruiz-Ruiz et al. 2022
+  distal_phalanx_length_mm:    50.0     # L2 (thesis value; see "2-link approximation" note below)
   pinch_separation_mm:         75.0     # distance between the proximal and distal pinches
-  finger_base_positions_mm:            # Pbase of each finger w.r.t. the gripper centre  (TODO: transcribe from Ruiz-Ruiz et al. 2022 above)
-    left:  [0.0, 0.0]
-    right: [0.0, 0.0]
+  finger_base_positions_mm:            # Pbase of each finger w.r.t. the pinch centre, one pinch/claw
+    left:  [-40.0, 0.0]                # from "Distance between parallel fingers" D = 80 mm (Table 1)
+    right: [ 40.0, 0.0]                # i.e. +/- D/2, symmetric about the pinch centre
   # Raw acquisition column -> (pinch, side), confirmed by Rodrigo (2026-09-06),
-  # "izquierda/derecha" from the participant's point of view. See
-  # code/processing/build_dataset.py and data/README.md.
+  # "izquierda/derecha" from the participant's point of view. Cross-checked
+  # against Ruiz-Ruiz et al. 2022 Section 3.3: their finger numbering groups
+  # {finger 1, finger 4} on one side (lambda=-1) and {finger 2, finger 3} on
+  # the other (lambda=+1) -- i.e. {dedo1=prox-R, dedo4=dist-R} vs.
+  # {dedo2=prox-L, dedo3=dist-L}, matching this mapping exactly.
   raw_finger_column_mapping:
     dedo1: [proximal, right]
     dedo2: [proximal, left]
     dedo3: [distal, left]
     dedo4: [distal, right]
+  # Full finger design parameters (Table 1, Ruiz-Ruiz et al. 2022). NOTE: this
+  # describes the real mechanism as a 5-bar linkage with a variable-length
+  # elastic link (S2) between the proximal and distal phalanx -- richer than
+  # the simple 2-link serial chain (L1, L2, theta1+theta2) used above and in
+  # gripper.py. The thesis's L1=40mm/L2=50mm looks like a deliberate
+  # straight-chain approximation of this for the ellipse-fitting purpose
+  # (a=40mm matches L1 exactly; there's no single "L2" in the real mechanism,
+  # only b/psi/contact-point-p below) -- STILL OPEN: confirm with Rodrigo/Jesus
+  # whether L2=50mm was fit/chosen to approximate this geometry, and whether
+  # gripper.py's contact polygon should eventually use the real 5-bar model
+  # instead of the 2-link approximation.
+  finger_design_reference_mm_deg:
+    distal_phalanx_base_b: 20.0        # "b" in Fig. 2/3
+    distal_phalanx_angle_psi_deg: 90.0 # "psi"
+    contact_point_p: 20.0              # "p" (p1 = p2 = 20 mm used in their force experiments)
+    servo_origin_angle_gamma_deg: 56.6 # "gamma"
+    o1_oa_distance_e: 28.0             # "e"
+    servo_lever_d: 50.0                # "d"
+    link_width_w: 10.0                 # "w"
+    distance_between_parallel_fingers_D: 80.0  # "D" (used above for finger_base_positions_mm)
 
 contact_polygon:
   model: hexagon            # hexagon | pentagon | rhombus  (hexagon: 100% feasible; pentagon/rhombus ~80%)

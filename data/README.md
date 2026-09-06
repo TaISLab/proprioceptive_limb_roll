@@ -69,12 +69,12 @@ Notes:
   `dedo1`=proximal-right, `dedo2`=proximal-left, `dedo3`=distal-left,
   `dedo4`=distal-right).
 - Still open: per-participant anthropometry (`a`, `b` semi-axes) was not
-  collected (see "Anthropometry / demographics" below for the fallback), and
-  `P_base` per finger is still missing from `config/gripper.yaml` (now that
-  Ruiz-Ruiz et al. 2022 is identified as the reference to transcribe it
-  from — see `hardware/README.md`). Both block actually running
-  `gripper.contact_polygon` on this data (parsing/unit conversion works
-  today; the geometric estimation doesn't yet).
+  collected (see "Anthropometry / demographics" below for the fallback).
+  `P_base` is now filled in `config/gripper.yaml` (from Ruiz-Ruiz et al.
+  2022's `D` = 80 mm — see `hardware/README.md`), which unblocks running
+  `gripper.contact_polygon` on this data; that step (parsing/unit conversion
+  -> contact polygon -> ellipse fit -> q5) still needs to actually be wired
+  up in `build_dataset.py`.
 
 ## Raw file schema (as actually received — Exp. 3)
 

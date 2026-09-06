@@ -35,11 +35,13 @@ python code/analysis/exp3_continuous.py
 `estimation/` contains working implementations of the unambiguous steps
 (kinematics, hexagon polygon, half-spaces, MVIE, Fit Anatomical, axis, `q5`).
 Items still marked `NotImplementedError` / `TODO`: pentagon & rhombus polygon
-construction (line-intersection, eq. 3.23–3.25), `P_base` values from CAD, the
-gripper-plane → Cartesian mapping of the ellipse major diagonal, and the
-acquisition / analysis scripts.
+construction (line-intersection, eq. 3.23–3.25), the gripper-plane → Cartesian
+mapping of the ellipse major diagonal, and the acquisition / analysis
+scripts. `P_base` is now filled in `config/gripper.yaml` (see
+`hardware/README.md`).
 
 `processing/build_dataset.py` parses the real Experiment 2 (discrete) export
-(column rename + deg→rad) — see `data/README.md`. It does not yet run the
-geometric pipeline on that data (blocked on `P_base`), and Experiment 3
+(column rename + deg→rad) — see `data/README.md`. It does not yet call into
+`gripper.contact_polygon`/the rest of the geometric pipeline (that wiring is
+still to be written, now that `P_base` is available), and Experiment 3
 (continuous) still needs its own resampling step for the raw rosbag export.
