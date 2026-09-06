@@ -68,11 +68,13 @@ Notes:
   `config/gripper.yaml`'s `raw_finger_column_mapping`, confirmed by Rodrigo:
   `dedo1`=proximal-right, `dedo2`=proximal-left, `dedo3`=distal-left,
   `dedo4`=distal-right).
-- Still open: no anthropometry (`a`, `b` semi-axes) accompanies this file yet
-  — needed for Fit Anatomical — and `P_base` per finger from CAD is still
-  missing, which blocks actually running `gripper.contact_polygon` on this
-  data (parsing/unit conversion works today; the geometric estimation doesn't
-  yet).
+- Still open: per-participant anthropometry (`a`, `b` semi-axes) was not
+  collected (see "Anthropometry / demographics" below for the fallback), and
+  `P_base` per finger is still missing from `config/gripper.yaml` (now that
+  Ruiz-Ruiz et al. 2022 is identified as the reference to transcribe it
+  from — see `hardware/README.md`). Both block actually running
+  `gripper.contact_polygon` on this data (parsing/unit conversion works
+  today; the geometric estimation doesn't yet).
 
 ## Raw file schema (as actually received — Exp. 3)
 
@@ -121,10 +123,13 @@ code, then discarded — see "Anonymisation" above). This is recorded in
 `data/raw/exp2_discrete/participants_meta.csv` (git-ignored, like all raw
 data).
 
-Still missing entirely: the forearm section semi-axes (`a`, `b`) needed to
-calibrate Fit Anatomical (Exp. 3) and useful context for Exp. 2 — genuinely
-pending from Rodrigo, not inferrable. Target per-participant schema once
-provided:
+**Per-participant forearm section semi-axes (`a`, `b`) were not collected —
+confirmed, this is not a "pending" item.** Fit Anatomical needs a known
+aspect ratio to calibrate against; without per-participant measurements, use
+the population model from thesis ref. `[4]` (3D-scan ellipse fit, R²
+0.898–0.980) or a fixed literature value instead. Target per-participant
+schema, kept here for reference in case per-participant values become
+available later:
 
 ```json
 {

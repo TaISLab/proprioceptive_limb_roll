@@ -1,11 +1,17 @@
 # Geometric and solver parameters for the proprioceptive forearm-roll estimator.
 # Values from the thesis (§3.4). Adjust to the physical gripper if it changes.
+#
+# Primary reference for the gripper's kinematics/dimensions:
+#   Ruiz-Ruiz, F.J.; Ventura, J.; Urdiales, C.; Gomez-de-Gabriel, J.M.
+#   "Compliant gripper with force estimation for physical human-robot
+#   interaction." Mechanism and Machine Theory, 2022, 178, 105062.
+#   https://doi.org/10.1016/j.mechmachtheory.2022.105062
 
 gripper:
   proximal_phalanx_length_mm: 40.0     # L1
   distal_phalanx_length_mm:    50.0     # L2
   pinch_separation_mm:         75.0     # distance between the proximal and distal pinches
-  finger_base_positions_mm:            # Pbase of each finger w.r.t. the gripper centre  (TODO: fill from CAD)
+  finger_base_positions_mm:            # Pbase of each finger w.r.t. the gripper centre  (TODO: transcribe from Ruiz-Ruiz et al. 2022 above)
     left:  [0.0, 0.0]
     right: [0.0, 0.0]
   # Raw acquisition column -> (pinch, side), confirmed by Rodrigo (2026-09-06),

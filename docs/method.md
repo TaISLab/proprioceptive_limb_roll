@@ -25,7 +25,13 @@ subjects.*
 ## 1. Contact polygon  (`gripper.py`, §3.4.1)
 
 Per finger: proximal phalanx `L1 = 40 mm`, distal phalanx `L2 = 50 mm`, base
-point `P_base` (from CAD).
+point `P_base`. The gripper's kinematics and dimensions are described in full
+in Ruiz-Ruiz, F.J.; Ventura, J.; Urdiales, C.; Gómez-de-Gabriel, J.M.
+*Compliant gripper with force estimation for physical human–robot
+interaction.* Mechanism and Machine Theory, 2022, 178, 105062,
+https://doi.org/10.1016/j.mechmachtheory.2022.105062 — see
+[`hardware/README.md`](../hardware/README.md). `P_base` still needs
+transcribing from there into `config/gripper.yaml`.
 
     P_joint = P_base  + [L1 cos θ1,          L1 sin θ1]
     P_tip   = P_joint + [L2 cos(θ1+θ2),      L2 sin(θ1+θ2)]

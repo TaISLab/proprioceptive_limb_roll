@@ -81,7 +81,11 @@ pHRI workstation (thesis §2.1): **Franka FR3** collaborative manipulator with a
 participant's forearm; 4 extrinsically calibrated RGB-D cameras (eye-to-hand);
 ROS Noetic. Each gripper finger: proximal phalanx **L1 = 40 mm**, distal phalanx
 **L2 = 50 mm**; the two pinches are **75 mm** apart; phalange angles read by
-high-resolution magnetic encoders. See [`hardware/README.md`](hardware/README.md).
+high-resolution magnetic encoders. Full gripper kinematics/dimensions:
+Ruiz-Ruiz et al., *Compliant gripper with force estimation for physical
+human–robot interaction*, Mechanism and Machine Theory, 2022, 178, 105062
+(https://doi.org/10.1016/j.mechmachtheory.2022.105062). See
+[`hardware/README.md`](hardware/README.md).
 
 Ground truth for q5: an **IMU / accelerometer** (MPU module) held by the
 participant, giving the roll angle relative to the end-effector frame

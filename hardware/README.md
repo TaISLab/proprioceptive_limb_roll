@@ -3,6 +3,21 @@
 pHRI workstation and gripper used to grasp and roll the participant's forearm
 (thesis §2.1, §3.4.1, §4.1).
 
+**Primary reference for the gripper's kinematics and dimensions:**
+
+> Ruiz-Ruiz, F.J.; Ventura, J.; Urdiales, C.; Gómez-de-Gabriel, J.M. *Compliant
+> gripper with force estimation for physical human–robot interaction.*
+> Mechanism and Machine Theory, 2022, 178, 105062.
+> https://doi.org/10.1016/j.mechmachtheory.2022.105062
+
+That paper describes the four-finger under-actuated compliant gripper this
+project uses (rigid-link fingers with a compression spring in place of one
+link, high-resolution angular sensors at the passive joints) in full detail.
+The exact finger base positions (`P_base`) and any link-length values there
+should supersede the placeholders in `config/gripper.yaml` — accessing the
+full text (e.g. via institutional access to ScienceDirect) to pull those
+numbers is still pending.
+
 ## Manipulator
 
 - **Franka FR3** collaborative arm, ROS Noetic.
@@ -16,8 +31,9 @@ pHRI workstation and gripper used to grasp and roll the participant's forearm
 - Two **parallel pinches**, **75 mm** apart, so two forearm cross-sections are
   sampled far enough apart to define the forearm axis.
 - Each finger: two links — proximal phalanx **L1 = 40 mm**, distal phalanx
-  **L2 = 50 mm** — with a fixed base point `P_base` per finger (from CAD; fill in
-  `config/gripper.yaml`).
+  **L2 = 50 mm** (thesis values; cross-check against Ruiz-Ruiz et al. 2022
+  above) — with a fixed base point `P_base` per finger (see that paper; still
+  to be transcribed into `config/gripper.yaml`).
 - Passive phalange angles `(θ1, θ2)` read by **high-resolution magnetic
   encoders**.
 - Smart servo with position feedback on the actuated joint.
