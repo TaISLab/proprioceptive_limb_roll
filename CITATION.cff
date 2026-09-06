@@ -37,6 +37,29 @@ version: "0.1.0"
 date-released: "2026-09-02"
 license: MIT
 repository-code: "https://github.com/TaISLab/proprioceptive_limb_roll"
+references:
+  - type: dataset
+    title: "Proprioceptive estimation of forearm roll during robotic grasping — dataset (Experiments 2 & 3)"
+    authors:
+      - family-names: "Castro Ochoa"
+        given-names: "Rodrigo"
+        affiliation: "Universidad de Málaga"
+      - family-names: "Gómez de Gabriel"
+        given-names: "Jesús Manuel"
+        affiliation: "Universidad de Málaga"
+      - family-names: "Urdiales"
+        given-names: "Cristina"
+        affiliation: "Universidad de Málaga"
+      - family-names: "de Cózar"
+        given-names: "Óscar"
+        affiliation: "Universidad de Málaga"
+      - family-names: "Blázquez"
+        given-names: "Beatriz"
+        affiliation: "Universidad de Málaga"
+    doi: "10.5281/zenodo.22551414"
+    url: "https://zenodo.org/records/22551414"
+    license: CC-BY-4.0
+    year: 2026
 preferred-citation:
   type: thesis
   title: "Sistema multisensorial para la interacción física humano-robot"

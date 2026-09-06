@@ -13,16 +13,13 @@ timing independent of the code repository (e.g. to coordinate with the journal
 submission), avoid bloating the git history with CSV data, and give the
 dataset its own citable DOI.
 
-**Status:** Rodrigo's raw exports for Experiments 2 and 3 have been received
-and anonymised locally (kept only under `data/raw/`, which is git-ignored —
-never committed). Both are being prepared for deposit on Zenodo, including
-the Experiment 3 export's precomputed per-sample error against ground truth
-(`error_abs`/`q5_inv`, effectively the paper's headline result at sample
-resolution) — a conscious call by the PI to publish the raw data alongside
-the code rather than withhold it. Fill in once published:
+**Status: published.** Rodrigo's raw exports for Experiments 2 and 3,
+anonymised, including the Experiment 3 export's precomputed per-sample error
+against ground truth (`error_abs`/`q5_inv`) — a conscious call by the PI to
+publish the raw data alongside the code rather than withhold it.
 
-- Dataset DOI: `TODO`
-- Dataset URL: `TODO`
+- Dataset DOI: [10.5281/zenodo.22551414](https://doi.org/10.5281/zenodo.22551414)
+- Dataset URL: https://zenodo.org/records/22551414
 
 **Anonymisation:** the mapping from real participant names to codes (`P01`…)
 is held privately by the PI, outside this repository and outside Zenodo — it

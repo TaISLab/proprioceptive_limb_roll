@@ -97,10 +97,10 @@ pronation**, zero at the neutral pose.
 
 The raw per-participant recordings for Experiments 2 and 3 are **not stored in
 this repository**. They are archived as a separate dataset on Zenodo under
-CC-BY-4.0, with their own DOI (link added here once minted — see
-[`data/README.md`](data/README.md) for the current status and the file schema).
-Participants are anonymised (`P01`, `P02`, …); no identifying data is stored.
-Data collected under signed informed consent with guaranteed anonymisation
+CC-BY-4.0: [10.5281/zenodo.22551414](https://doi.org/10.5281/zenodo.22551414)
+(see [`data/README.md`](data/README.md) for the file schema). Participants
+are anonymised (`P01`, `P02`, …); no identifying data is stored. Data
+collected under signed informed consent with guaranteed anonymisation
 (thesis §4.2).
 
 - **Experiment 2 (discrete):** cohort of 9 (5 M, 4 F). From neutral (0°), forearm
