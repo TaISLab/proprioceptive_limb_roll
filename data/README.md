@@ -15,12 +15,11 @@ dataset its own citable DOI.
 
 **Status:** Rodrigo's raw exports for Experiments 2 and 3 have been received
 and anonymised locally (kept only under `data/raw/`, which is git-ignored —
-never committed). **Not yet deposited on Zenodo**, deliberately: the
-Experiment 3 export already carries a precomputed per-sample error against
-ground truth, which is effectively the paper's headline result at sample
-resolution — publishing it now would let anyone reproduce the accuracy figure
-before the journal submission. Hold the deposit until the paper timing is
-decided, then fill in:
+never committed). Both are being prepared for deposit on Zenodo, including
+the Experiment 3 export's precomputed per-sample error against ground truth
+(`error_abs`/`q5_inv`, effectively the paper's headline result at sample
+resolution) — a conscious call by the PI to publish the raw data alongside
+the code rather than withhold it. Fill in once published:
 
 - Dataset DOI: `TODO`
 - Dataset URL: `TODO`
@@ -93,11 +92,12 @@ a tidy table). Relevant columns:
 | `q5_inv` | deg | `q5_pinza_2` re-expressed in the ground-truth sign convention (`180 − q5_pinza_2`) |
 | `error_abs` | deg | **precomputed** \|`q5_inv` − ground truth\| — already the accuracy metric, at sample resolution |
 
-`error_abs`/`q5_inv` being already computed is exactly why this file is not
-going to Zenodo yet (see "Status" above) — it lets anyone reconstruct the
-paper's headline accuracy number directly. Also open: `/tactile/q5_pinza_1/angle`
-sits in a narrow 99–109° band throughout the recording (unlike `pinza_2`,
-which spans the full sweep) — worth confirming with Rodrigo whether pinch 1
+`error_abs`/`q5_inv` being already computed means this file lets anyone
+reconstruct the paper's headline accuracy number directly — the PI has
+decided to publish it as-is regardless (see "Status" above). Also open:
+`/tactile/q5_pinza_1/angle` sits in a narrow 99–109° band throughout the
+recording (unlike `pinza_2`, which spans the full sweep) — worth confirming
+with Rodrigo whether pinch 1
 was static/occluded for this session or this is a genuine signal.
 
 ## How to publish the dataset on Zenodo
