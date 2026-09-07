@@ -140,6 +140,10 @@ by MICIU/AEI/10.13039/501100011033/FEDER, UE. TaISLab, Universidad de Málaga.
 > Este proyecto es parte del proyecto PID2021-127221OB-I00, financiado por
 > MICIU/AEI/10.13039/501100011033/FEDER, UE.
 
+<p align="center">
+  <img src="docs/figures/logo_mciu_aei_feder.jpg" alt="Ministerio de Ciencia, Innovación y Universidades — Agencia Estatal de Investigación — Cofinanciado por la Unión Europea (FEDER)" width="600">
+</p>
+
 ## 8. License
 
 - **Code:** MIT — see [`LICENSE`](LICENSE).
